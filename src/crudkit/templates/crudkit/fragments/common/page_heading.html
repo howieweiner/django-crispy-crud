@@ -1,0 +1,10 @@
+{% if heading %}
+    <div class="md:flex md:items-center md:justify-between max-w-sm md:max-w-2xl lg:max-w-screen-lg 2xl:max-w-screen-3xl">
+        <div class="min-w-0 flex-1 flex justify-start items-baseline gap-4">
+            <h2 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">{{ heading }}</h2>
+            {% if sub_heading %}
+            <h3 class="text-lg text-gray-700">{{ sub_heading }}</h3>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

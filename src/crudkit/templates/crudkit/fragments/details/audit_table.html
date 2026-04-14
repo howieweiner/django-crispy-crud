@@ -1,0 +1,49 @@
+<div id="audit-table">
+    <table class="min-w-full divide-y divide-gray-300">
+        <thead>
+        <tr>
+            <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
+                Date
+            </th>
+            <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
+                User
+            </th>
+            <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
+                Field
+            </th>
+            <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
+                From
+            </th>
+            <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">To
+            </th>
+        </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 bg-white">
+        {% for log_entry in history %}
+            {% for key, value in log_entry.changes_dict.items %}
+                <tr class="even:bg-gray-50">
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
+                        {% if forloop.first %}
+                            {{ log_entry.timestamp|date:"d/m/Y H:i:s" }}
+                        {% endif %}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
+                        {% if forloop.first %}
+                            {{ log_entry.actor }}
+                        {% endif %}
+                    </td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900 font-medium">{{ key }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ value.0|default:"-" }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ value.1|default:"-" }}</td>
+                </tr>
+            {% endfor %}
+        {% empty %}
+            <tr>
+                <td colspan="5" class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">No history for this item
+                    has been logged yet.
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% include 'crudkit/fragments/table/hx_audit_pagination.html' %}
+</div>

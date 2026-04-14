@@ -1,0 +1,11 @@
+{% load crispy_forms_tags crudkit_tags %}
+<form
+      hx-get="{% url view_name %}"
+      hx-target="#list-table"
+      hx-trigger="change from:#id_page_size, input changed delay:500ms from:#id_q, search from:#id_q{% filter_form_fields %}"
+>
+    <input type="hidden" name="paginate_by" id="id_page_size" value="{{ request.GET.page_size }}"/>
+    {% if filter_form %}
+        {% crispy filter_form %}
+    {% endif %}
+</form>

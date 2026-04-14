@@ -1,0 +1,8 @@
+{% spaceless %}
+<td class="
+    whitespace-nowrap px-2 py-2 text-sm
+    {% if strong %}font-medium text-gray-800{% else %}text-gray-700{% endif %}
+    {% if align == 'right' %} text-right{% elif align == 'center' %} text-center{% endif %}
+    {% if not first_column %}hidden lg:table-cell{% endif %}
+">{{ text }}</td>
+{% endspaceless %}

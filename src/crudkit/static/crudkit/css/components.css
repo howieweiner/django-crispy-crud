@@ -1,0 +1,43 @@
+/*
+ * django-crud-kit component classes
+ *
+ * Import this file in your Tailwind CSS input file:
+ *
+ *   @import "../../static/crudkit/css/components.css";
+ *
+ * Or copy these definitions into your own CSS.
+ */
+
+@layer components {
+  .btn-primary {
+    @apply flex items-center justify-center gap-2 rounded bg-gray-800 py-2 px-4 font-semibold text-white hover:cursor-pointer hover:bg-gray-700;
+  }
+
+  .btn-secondary {
+    @apply flex items-center justify-center gap-2 rounded border border-gray-300 bg-white py-2 px-4 font-medium text-gray-800 hover:cursor-pointer hover:bg-gray-50;
+  }
+
+  .btn-important {
+    @apply flex items-center justify-center gap-2 rounded bg-red-700 py-2 px-4 font-semibold text-white hover:cursor-pointer hover:bg-red-500;
+  }
+
+  .btn-disabled {
+    @apply flex !cursor-not-allowed items-center justify-center gap-2 rounded !bg-gray-200 py-2 px-4 font-semibold !text-gray-500;
+  }
+
+  .form-link {
+    @apply py-2 font-medium text-gray-600 hover:cursor-pointer hover:text-gray-900;
+  }
+
+  .readonly-form-field {
+    @apply block w-full appearance-none rounded-lg border border-gray-400 bg-gray-50 px-4 py-2 leading-normal text-gray-500;
+  }
+
+  button.toggle {
+    @apply bg-gray-200;
+  }
+
+  button.toggle.checked {
+    @apply !bg-green-200;
+  }
+}

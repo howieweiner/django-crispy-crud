@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include 'crudkit/fragments/common/messages.html' %}
+{% include 'crudkit/fragments/common/page_heading.html' %}
+
+<div class="mt-6 flex items-center justify-between">
+  {% include 'crudkit/fragments/forms/hx_filter_form.html' with view_name="widget-list" %}
+
+  {% if create_action %}
+    <a id="add-button" href="{{ create_action }}" class="btn-primary">Add {{ model_name|title }}</a>
+  {% endif %}
+</div>
+
+<div id="list-table" class="mt-4">
+  {% include "testapp/fragments/widget_table.html" %}
+</div>
+{% endblock %}

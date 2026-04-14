@@ -1,0 +1,27 @@
+{% include 'crudkit/fragments/loaders/loading_spinner.html' %}
+<table class="min-w-full divide-y divide-gray-300">
+    <thead>
+        <tr>
+            {% include 'crudkit/fragments/table/table_heading.html' with text="Name" first_column=True %}
+            {% include 'crudkit/fragments/table/table_heading.html' with text="Active" %}
+            {% include 'crudkit/fragments/table/table_heading.html' with text="" %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for widget in object_list %}
+        <tr class="hover:bg-gray-50">
+            {% include 'crudkit/fragments/table/table_cell.html' with text=widget.name first_column=True strong=True %}
+            {% include 'crudkit/fragments/table/table_cell.html' with text=widget.is_active %}
+            <td class="whitespace-nowrap px-2 py-2 text-sm text-right">
+                <a href="{{ widget.get_absolute_url }}" class="form-link">Edit</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">No widgets found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% if page_obj %}
+  {% include 'crudkit/fragments/table/hx_pagination.html' with page=page_obj %}
+{% endif %}
+{% include 'crudkit/fragments/table/hx_add_model_oob_link.html' with is_htmx=request.htmx %}

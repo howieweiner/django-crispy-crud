@@ -1,0 +1,5 @@
+{% if error_key %}
+    {% for error in error_key %}
+      <p class="text-sm leading-6 text-red-600 mt-2 font-medium">{{ error|escape }}</p>
+    {% endfor %}
+{% endif %}

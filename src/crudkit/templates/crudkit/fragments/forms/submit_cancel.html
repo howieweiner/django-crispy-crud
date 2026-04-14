@@ -1,0 +1,10 @@
+<div class="mt-8 h-24 border-t border-gray-900/10 flex justify-end items-center space-x-8">
+  <a href="{{ form.cancel_link }}" class="form-link" id="cancel-btn">Cancel</a>
+  <button
+    type="submit"
+    class="btn-primary"
+    :disabled="!isDirty"
+    :class="{'btn-disabled': !isDirty}"
+  >Save
+  </button>
+</div>

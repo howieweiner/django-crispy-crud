@@ -1,0 +1,31 @@
+<nav class="flex items-center justify-between gap-8 border-t border-gray-200 bg-white py-3"
+     aria-label="Pagination">
+  <div class="hidden sm:block">
+    <p class="text-sm text-gray-700">
+      Showing
+      <span class="font-medium">{{ history.start_index }}</span>
+      to
+      <span class="font-medium">{{ history.end_index }}</span>
+      of
+      <span class="font-medium">{{ history.paginator.count }}</span>
+      results
+    </p>
+  </div>
+
+  <div class="flex flex-1 justify-between sm:justify-end">
+    {% if history.has_previous %}
+      <a href="" hx-get="?audit_page={{ history.previous_page_number }}&{{ filter }}" hx-target="#audit-table"
+         class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Previous</a>
+    {% else %}
+      <span
+        class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-300 ring-1 ring-inset ring-gray-300">Previous</span>
+    {% endif %}
+    {% if history.has_next %}
+      <a href="" hx-get="?audit_page={{ history.next_page_number }}&{{ filter }}" hx-target="#audit-table"
+         class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Next</a>
+    {% else %}
+      <span
+        class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-300 ring-1 ring-inset ring-gray-300">Next</span>
+    {% endif %}
+  </div>
+</nav>

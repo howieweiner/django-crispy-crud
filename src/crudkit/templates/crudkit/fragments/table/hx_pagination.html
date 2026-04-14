@@ -1,0 +1,44 @@
+<nav class="flex items-center justify-between gap-8 border-t border-gray-200 bg-white py-3"
+     aria-label="Pagination">
+  <div class="hidden sm:block">
+    <p class="text-sm text-gray-700">
+      Showing
+      <span class="font-medium">{{ page.start_index }}</span>
+      to
+      <span class="font-medium">{{ page.end_index }}</span>
+      of
+      <span class="font-medium">{{ page.paginator.count }}</span>
+      results
+    </p>
+  </div>
+
+  {% if page_size_options %}
+    <div class="hidden sm:block">
+      <div class="flex items-center justify-between gap-4">
+        {% for size in page_size_options %}
+          <div x-on:click="updatePageSize({{ size }})">
+            <span
+              class="inline-flex items-center rounded-md text-sm font-medium px-2 py-1 hover:cursor-pointer {% if page_size == size|stringformat:'d' %}bg-gray-300 text-gray-700{% else %}bg-gray-100 text-gray-500{% endif %}">{{ size }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="flex flex-1 justify-between sm:justify-end">
+    {% if page.has_previous %}
+      <a href="" hx-get="?page={{ page.previous_page_number }}&{{ pagination_query_params }}" hx-target="#list-table"
+         class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Previous</a>
+    {% else %}
+      <span
+        class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-300 ring-1 ring-inset ring-gray-300">Previous</span>
+    {% endif %}
+    {% if page.has_next %}
+      <a href="" hx-get="?page={{ page.next_page_number }}&{{ pagination_query_params }}" hx-target="#list-table"
+         class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Next</a>
+    {% else %}
+      <span
+        class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-300 ring-1 ring-inset ring-gray-300">Next</span>
+    {% endif %}
+  </div>
+</nav>
