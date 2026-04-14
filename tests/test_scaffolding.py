@@ -1,4 +1,3 @@
-import django
 from django.apps import apps
 
 
@@ -39,7 +38,6 @@ class TestPackageInstallation:
         assert apps.is_installed("tests.testapp")
 
     def test_submodules_importable(self):
-        from crudkit import views, forms, models, utils
         from crudkit.views import mixins as view_mixins
         from crudkit.views import utils as view_utils
         from crudkit.forms import crispy

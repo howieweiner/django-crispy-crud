@@ -4,13 +4,10 @@ from django.views.generic import ListView, CreateView, UpdateView
 
 from crudkit.views.mixins import (
     PaginationMixin,
-    HtmxPaginationMixin,
     CrispyFormArgsMixin,
     BaseAppMixin,
     BaseModelAppMixin,
-    HtmxFilterListMixin,
     FilterFormMixin,
-    AuditLogMixin,
 )
 
 from tests.testapp.models import Widget, Gadget

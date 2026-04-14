@@ -6,8 +6,7 @@ class AuditOnUpdateOnly:
             from auditlog.context import disable_auditlog
         except ImportError as e:
             raise ImportError(
-                "django-auditlog is required for AuditOnUpdateOnly. "
-                "Install it with: pip install django-crud-kit[audit]"
+                "django-auditlog is required for AuditOnUpdateOnly. Install it with: pip install django-crud-kit[audit]"
             ) from e
 
         is_new = self.pk is None

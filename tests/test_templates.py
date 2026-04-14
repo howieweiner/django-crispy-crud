@@ -177,7 +177,7 @@ class TestTemplateTag:
             is_active = forms.BooleanField(required=False)
             category = forms.CharField(required=False)
 
-        t = Template('{% load crudkit_tags %}{% filter_form_fields %}')
+        t = Template("{% load crudkit_tags %}{% filter_form_fields %}")
         ctx = Context({"filter_form": TestFilterForm()})
         result = t.render(ctx)
         assert "change from:[name='is_active']" in result
@@ -190,13 +190,13 @@ class TestTemplateTag:
         class EmptyFilterForm(forms.Form):
             q = forms.CharField(required=False)
 
-        t = Template('{% load crudkit_tags %}{% filter_form_fields %}')
+        t = Template("{% load crudkit_tags %}{% filter_form_fields %}")
         ctx = Context({"filter_form": EmptyFilterForm()})
         result = t.render(ctx)
         assert result.strip() == ""
 
     def test_filter_form_fields_no_form(self):
-        t = Template('{% load crudkit_tags %}{% filter_form_fields %}')
+        t = Template("{% load crudkit_tags %}{% filter_form_fields %}")
         ctx = Context({})
         result = t.render(ctx)
         assert result.strip() == ""

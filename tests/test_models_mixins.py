@@ -1,5 +1,3 @@
-import pytest
-
 from crudkit.models.mixins import AuditOnUpdateOnly
 
 

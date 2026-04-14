@@ -1,5 +1,3 @@
-import pytest
-
 from crudkit.conf import get_setting
 
 
