@@ -47,8 +47,8 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/howieweiner/django-crud-kit"
-Repository = "https://github.com/howieweiner/django-crud-kit.git"
+Homepage = "https://github.com/howieweiner/django-crispy-crud"
+Repository = "https://github.com/howieweiner/django-crispy-crud.git"
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -1,5 +1,8 @@
 # django-crispy-crud
 
+[![PyPI version](https://img.shields.io/pypi/v/django-crispy-crud.svg)](https://pypi.org/project/django-crispy-crud/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/howieweiner/django-crispy-crud/blob/main/LICENSE)
+
 Reusable Django CRUD views, forms, and template fragments with HTMX, Alpine.js, and Tailwind CSS.
 
 ## Installation
@@ -240,8 +243,8 @@ All settings are optional and have sensible defaults:
 The test app in `tests/testapp/` is a working example you can clone as a starting point. To run it locally:
 
 ```bash
-git clone https://github.com/howieweiner/django-crud-kit.git
-cd django-crud-kit
+git clone https://github.com/howieweiner/django-crispy-crud.git
+cd django-crispy-crud
 uv run python manage.py migrate
 uv run python manage.py runserver
 ```
