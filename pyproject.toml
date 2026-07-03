@@ -73,10 +73,9 @@ tag_format = "v$version"
 version_files = [
     "src/crispy_crud/__init__.py:__version__",
 ]
-# CHANGELOG.md is hand-maintained while the history predates conventional
-# commits. Flip to true once commits follow the conventional format so cz can
-# generate changelog entries on bump.
-update_changelog_on_bump = false
+# cz generates CHANGELOG.md entries from conventional commits on bump; the
+# Release workflow extracts the new version's section for the GitHub release.
+update_changelog_on_bump = true
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "tests.settings"
