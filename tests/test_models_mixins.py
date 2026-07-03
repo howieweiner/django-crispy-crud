@@ -1,4 +1,4 @@
-from crudkit.models.mixins import AuditOnUpdateOnly
+from crispy_crud.models.mixins import AuditOnUpdateOnly
 
 
 class TestAuditOnUpdateOnly:

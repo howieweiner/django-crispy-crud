@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, UpdateView
 from django_filters.views import FilterView
 
-from crudkit.views.mixins import (
+from crispy_crud.views.mixins import (
     BaseModelAppMixin,
     CrispyFormArgsMixin,
     FilterFormMixin,

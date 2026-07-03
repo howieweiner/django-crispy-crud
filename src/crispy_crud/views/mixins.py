@@ -22,7 +22,7 @@ class PaginationMixin:
     param_name = "paginate_by"
 
     def get_default_page_size(self):
-        return self.paginate_by or get_setting("CRUDKIT_PAGINATE_BY")
+        return self.paginate_by or get_setting("CRISPY_CRUD_PAGINATE_BY")
 
     def get_paginate_by(self, queryset):
         page_size = self.request.GET.get(self.param_name)
@@ -41,7 +41,7 @@ class PaginationMixin:
             context["page_size"] = self.request.COOKIES[self.cookie_name]
         else:
             context["page_size"] = self.get_default_page_size()
-        context["page_size_options"] = get_setting("CRUDKIT_PAGE_SIZE_OPTIONS")
+        context["page_size_options"] = get_setting("CRISPY_CRUD_PAGE_SIZE_OPTIONS")
         return context
 
     def render_to_response(self, context, **response_kwargs):
@@ -229,12 +229,12 @@ class FilterFormMixin:
 class AuditLogMixin:
     """Provides paginated audit history for an object."""
 
-    audit_template_name = "crudkit/fragments/details/audit_table.html"
+    audit_template_name = "crispy_crud/fragments/details/audit_table.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         history_list = self.object.history.all()
-        page_size = get_setting("CRUDKIT_AUDIT_PAGE_SIZE")
+        page_size = get_setting("CRISPY_CRUD_AUDIT_PAGE_SIZE")
         paginator = Paginator(history_list, page_size)
         page = self.request.GET.get("audit_page", 1)
         history = paginator.get_page(page)

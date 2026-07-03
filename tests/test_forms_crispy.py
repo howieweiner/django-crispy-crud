@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django.template import Context
 from django.test import RequestFactory
 
-from crudkit.forms.crispy import AlpineSubmit, CrispyFormMixin, BaseFilterFormHelper
+from crispy_crud.forms.crispy import AlpineSubmit, CrispyFormMixin, BaseFilterFormHelper
 from tests.testapp.models import Widget
 
 

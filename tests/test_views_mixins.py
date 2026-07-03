@@ -2,7 +2,7 @@ import pytest
 from django.test import RequestFactory
 from django.views.generic import ListView, CreateView, UpdateView
 
-from crudkit.views.mixins import (
+from crispy_crud.views.mixins import (
     PaginationMixin,
     CrispyFormArgsMixin,
     BaseAppMixin,
@@ -105,7 +105,7 @@ class TestPaginationMixin:
         assert context["page_size_options"] == [10, 25, 50, 100]
 
     def test_page_size_options_override(self, rf, settings):
-        settings.CRUDKIT_PAGE_SIZE_OPTIONS = [5, 10, 20]
+        settings.CRISPY_CRUD_PAGE_SIZE_OPTIONS = [5, 10, 20]
         request = rf.get("/")
         view = PaginatedListView()
         view.request = request

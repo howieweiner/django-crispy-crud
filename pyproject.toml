@@ -3,15 +3,16 @@ requires = ["setuptools>=68.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "django-crud-kit"
+name = "django-crispy-crud"
 version = "0.1.0"
 description = "Reusable Django CRUD views, forms, and template fragments with HTMX, Alpine.js, and Tailwind CSS"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
 authors = [
-    { name = "Howie Weiner" },
+    { name = "Howie Weiner", email = "hello@builtbyhowie.co.uk" },
 ]
+keywords = ["django", "crud", "htmx", "alpine", "tailwind", "forms"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Framework :: Django",
@@ -20,6 +21,7 @@ classifiers = [
     "Framework :: Django :: 5.2",
     "Framework :: Django :: 6.0",
     "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -44,8 +46,15 @@ dev = [
     "ruff>=0.4",
 ]
 
+[project.urls]
+Homepage = "https://github.com/howieweiner/django-crud-kit"
+Repository = "https://github.com/howieweiner/django-crud-kit.git"
+
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+crispy_crud = ["templates/**/*", "static/**/*"]
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "tests.settings"

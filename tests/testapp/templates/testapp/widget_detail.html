@@ -2,12 +2,12 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-{% include 'crudkit/fragments/common/messages.html' %}
-{% include 'crudkit/fragments/common/page_heading.html' %}
+{% include 'crispy_crud/fragments/common/messages.html' %}
+{% include 'crispy_crud/fragments/common/page_heading.html' %}
 
 {% crispy form %}
 
 {% if delete_action %}
-  {% include 'crudkit/fragments/details/delete_action.html' %}
+  {% include 'crispy_crud/fragments/details/delete_action.html' %}
 {% endif %}
 {% endblock %}

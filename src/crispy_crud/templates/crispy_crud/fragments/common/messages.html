@@ -1,10 +1,10 @@
 {% if messages %}
   {% for message in messages %}
     {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-      {% include 'crudkit/fragments/common/success_alert.html' with message=message %}
+      {% include 'crispy_crud/fragments/common/success_alert.html' with message=message %}
     {% endif %}
     {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-      {% include 'crudkit/fragments/common/error_alert.html' with message=message %}
+      {% include 'crispy_crud/fragments/common/error_alert.html' with message=message %}
     {% endif %}
   {% endfor %}
 {% endif %}

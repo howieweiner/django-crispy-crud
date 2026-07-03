@@ -1,4 +1,4 @@
-from crudkit.utils.url_utils import remove_empty_url_params
+from crispy_crud.utils.url_utils import remove_empty_url_params
 
 
 class TestRemoveEmptyUrlParams:

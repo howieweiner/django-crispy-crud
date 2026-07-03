@@ -2,7 +2,7 @@ from django import forms
 
 from crispy_forms.layout import Field, Layout
 
-from crudkit.forms.crispy import BaseFilterFormHelper, CrispyFormMixin
+from crispy_crud.forms.crispy import BaseFilterFormHelper, CrispyFormMixin
 
 from .models import Widget
 

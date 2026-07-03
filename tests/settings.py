@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     "crispy_tailwind",
     "django_htmx",
     "django_filters",
-    "crudkit",
+    "crispy_crud",
     "tests.testapp",
 ]
 

@@ -1,7 +1,7 @@
 import pytest
 from django.test import RequestFactory
 
-from crudkit.views.utils import add_page_context_data, get_cancel_url
+from crispy_crud.views.utils import add_page_context_data, get_cancel_url
 
 
 @pytest.fixture

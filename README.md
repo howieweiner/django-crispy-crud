@@ -1,4 +1,4 @@
-# django-crud-kit
+# django-crispy-crud
 
 Reusable Django CRUD views, forms, and template fragments with HTMX, Alpine.js, and Tailwind CSS.
 
@@ -7,34 +7,26 @@ Reusable Django CRUD views, forms, and template fragments with HTMX, Alpine.js, 
 **With uv:**
 
 ```bash
-uv add "django-crud-kit @ git+https://github.com/howieweiner/django-crud-kit.git"
+uv add django-crispy-crud
 ```
 
 **With pip:**
 
 ```bash
-pip install git+https://github.com/howieweiner/django-crud-kit.git
-```
-
-Or add to your `pyproject.toml` dependencies directly:
-
-```toml
-dependencies = [
-    "django-crud-kit @ git+https://github.com/howieweiner/django-crud-kit.git",
-]
+pip install django-crispy-crud
 ```
 
 For audit log support (optional):
 
 ```bash
-uv add "django-crud-kit[audit] @ git+https://github.com/howieweiner/django-crud-kit.git"
+uv add "django-crispy-crud[audit]"
 # or
-pip install "django-crud-kit[audit] @ git+https://github.com/howieweiner/django-crud-kit.git"
+pip install "django-crispy-crud[audit]"
 ```
 
 ## Setup
 
-Add `crudkit` to your `INSTALLED_APPS`:
+Add `crispy_crud` to your `INSTALLED_APPS`:
 
 ```python
 INSTALLED_APPS = [
@@ -45,7 +37,7 @@ INSTALLED_APPS = [
     "crispy_tailwind",
     "django_htmx",
     "django_filters",
-    "crudkit",
+    "crispy_crud",
 ]
 ```
 
@@ -93,12 +85,12 @@ Your base template must load Alpine.js and HTMX (not bundled):
 
 ### Component CSS
 
-The package templates use custom CSS classes (`btn-primary`, `btn-secondary`, `btn-important`, `btn-disabled`, `form-link`, `readonly-form-field`, `toggle`). A reference stylesheet is provided at `static/crudkit/css/components.css` using Tailwind `@apply` directives.
+The package templates use custom CSS classes (`btn-primary`, `btn-secondary`, `btn-important`, `btn-disabled`, `form-link`, `readonly-form-field`, `toggle`). A reference stylesheet is provided at `static/crispy_crud/css/components.css` using Tailwind `@apply` directives.
 
 Add it to your Tailwind CSS input file:
 
 ```css
-@import "../../static/crudkit/css/components.css";
+@import "../../static/crispy_crud/css/components.css";
 ```
 
 Or copy the definitions into your own CSS. See the test app's `base.html` for a working example.
@@ -110,7 +102,7 @@ Or copy the definitions into your own CSS. See the test app's `base.html` for a 
 ```python
 from django.views.generic import CreateView, UpdateView
 from django_filters.views import FilterView
-from crudkit.views import (
+from crispy_crud.views import (
     BaseModelAppMixin, CrispyFormArgsMixin,
     FilterFormMixin, HtmxFilterListMixin,
 )
@@ -137,7 +129,7 @@ class WidgetUpdateView(BaseModelAppMixin, CrispyFormArgsMixin, UpdateView):
 
 ```python
 from django import forms
-from crudkit.forms import CrispyFormMixin
+from crispy_crud.forms import CrispyFormMixin
 
 class WidgetForm(CrispyFormMixin, forms.ModelForm):
     cancel_action = "widget-list"
@@ -165,7 +157,7 @@ def __init__(self, *args, **kwargs):
 Create a filter form with a crispy helper using `BaseFilterFormHelper`:
 
 ```python
-from crudkit.forms import BaseFilterFormHelper
+from crispy_crud.forms import BaseFilterFormHelper
 from crispy_forms.layout import Field, Layout
 
 class WidgetFilterFormHelper(BaseFilterFormHelper):
@@ -192,7 +184,7 @@ class WidgetFilterForm(forms.Form):
 Set `filter_form_class` on your list view, and include the HTMX filter form fragment in your list template:
 
 ```html
-{% include 'crudkit/fragments/forms/hx_filter_form.html' with view_name="widget-list" %}
+{% include 'crispy_crud/fragments/forms/hx_filter_form.html' with view_name="widget-list" %}
 ```
 
 This renders a form that auto-submits via HTMX on input changes -- the search field fires after a 500ms debounce, and select/checkbox fields fire on change. The `filter_form_fields` template tag automatically generates the correct HTMX trigger selectors for your filter fields.
@@ -212,16 +204,16 @@ class WidgetFilter(django_filters.FilterSet):
 
 ### Template fragments
 
-The package provides reusable template fragments under `crudkit/fragments/`. Include them in your own templates:
+The package provides reusable template fragments under `crispy_crud/fragments/`. Include them in your own templates:
 
 ```html
-{% include 'crudkit/fragments/common/messages.html' %}
-{% include 'crudkit/fragments/common/page_heading.html' %}
-{% include 'crudkit/fragments/table/table_heading.html' with text="Name" first_column=True %}
-{% include 'crudkit/fragments/table/table_cell.html' with text=widget.name first_column=True %}
-{% include 'crudkit/fragments/table/hx_pagination.html' with page=page_obj %}
-{% include 'crudkit/fragments/details/delete_action.html' %}
-{% include 'crudkit/fragments/loaders/loading_spinner.html' %}
+{% include 'crispy_crud/fragments/common/messages.html' %}
+{% include 'crispy_crud/fragments/common/page_heading.html' %}
+{% include 'crispy_crud/fragments/table/table_heading.html' with text="Name" first_column=True %}
+{% include 'crispy_crud/fragments/table/table_cell.html' with text=widget.name first_column=True %}
+{% include 'crispy_crud/fragments/table/hx_pagination.html' with page=page_obj %}
+{% include 'crispy_crud/fragments/details/delete_action.html' %}
+{% include 'crispy_crud/fragments/loaders/loading_spinner.html' %}
 ```
 
 ### Static files
@@ -229,8 +221,8 @@ The package provides reusable template fragments under `crudkit/fragments/`. Inc
 Include the Alpine.js components for form state tracking and pagination:
 
 ```html
-<script src="{% static 'crudkit/js/formState.js' %}"></script>
-<script src="{% static 'crudkit/js/pagination.js' %}"></script>
+<script src="{% static 'crispy_crud/js/formState.js' %}"></script>
+<script src="{% static 'crispy_crud/js/pagination.js' %}"></script>
 ```
 
 ## Configuration
@@ -239,9 +231,9 @@ All settings are optional and have sensible defaults:
 
 | Setting | Default | Purpose |
 |---|---|---|
-| `CRUDKIT_PAGINATE_BY` | `25` | Default page size |
-| `CRUDKIT_PAGE_SIZE_OPTIONS` | `[10, 25, 50, 100]` | Page-size pills shown in pagination |
-| `CRUDKIT_AUDIT_PAGE_SIZE` | `25` | Rows per page in audit history table |
+| `CRISPY_CRUD_PAGINATE_BY` | `25` | Default page size |
+| `CRISPY_CRUD_PAGE_SIZE_OPTIONS` | `[10, 25, 50, 100]` | Page-size pills shown in pagination |
+| `CRISPY_CRUD_AUDIT_PAGE_SIZE` | `25` | Rows per page in audit history table |
 
 ## Running the test app
 
@@ -266,7 +258,7 @@ uv run ruff format src/ tests/   # format
 
 ## What's included
 
-### View mixins (`crudkit.views`)
+### View mixins (`crispy_crud.views`)
 - **PaginationMixin** -- page size from query param, cookie, or config
 - **HtmxPaginationMixin** -- extends PaginationMixin with HTMX URL push
 - **CrispyFormArgsMixin** -- injects `request` into form kwargs
@@ -276,20 +268,20 @@ uv run ruff format src/ tests/   # format
 - **FilterFormMixin** -- populates filter form in context
 - **AuditLogMixin** -- paginated audit history (requires `django-auditlog`)
 
-### Form helpers (`crudkit.forms`)
+### Form helpers (`crispy_crud.forms`)
 - **CrispyFormMixin** -- crispy FormHelper with cancel link and Alpine.js dirty-state
 - **AlpineSubmit** -- submit button with Alpine.js attributes
 - **BaseFilterFormHelper** -- filter form helper with search field and reset link
 
-### Model mixins (`crudkit.models`)
+### Model mixins (`crispy_crud.models`)
 - **AuditOnUpdateOnly** -- suppresses auditlog on creation, only logs updates
 
-### Template fragments (`crudkit/fragments/`)
+### Template fragments (`crispy_crud/fragments/`)
 - `common/` -- messages, alerts, page heading
 - `table/` -- pagination, table heading/cell, OOB add button
 - `details/` -- delete action with confirmation modal, audit history table
 - `forms/` -- filter form, field errors, submit/cancel, read-only fields
 - `loaders/` -- HTMX loading spinner and busy indicator
 
-### Template tags (`crudkit_tags`)
+### Template tags (`crispy_crud_tags`)
 - **filter_form_fields** -- generates HTMX trigger selectors for filter form fields

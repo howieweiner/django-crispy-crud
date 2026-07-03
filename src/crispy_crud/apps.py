@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class CrudKitConfig(AppConfig):
-    name = "crudkit"
-    verbose_name = "CRUD Kit"
+class CrispyCrudConfig(AppConfig):
+    name = "crispy_crud"
+    verbose_name = "Crispy CRUD"
     default_auto_field = "django.db.models.BigAutoField"
