@@ -54,7 +54,19 @@ class TestGetCancelUrl:
         url = get_cancel_url(request, None)
         assert url == "/previous-page/"
 
-    def test_falls_back_to_history_back(self, rf):
+    def test_falls_back_to_root_when_no_referrer(self, rf):
         request = rf.get("/")
         url = get_cancel_url(request, None)
-        assert "history.back()" in url
+        assert url == "/"
+
+    def test_rejects_offsite_referrer(self, rf):
+        request = rf.get("/", HTTP_REFERER="https://evil.example.com/phish")
+        url = get_cancel_url(request, None)
+        assert url == "/"
+
+    def test_encodes_query_params(self, rf):
+        request = rf.get("/", {"q": '"><img src=x onerror=alert(1)>'})
+        url = get_cancel_url(request, "widget-list")
+        assert '"' not in url
+        assert "<img" not in url
+        assert "q=%22%3E%3Cimg" in url

@@ -3,6 +3,7 @@ from urllib.parse import urlencode
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, ButtonHolder, Field, Layout
 from crispy_tailwind.layout import Submit
+from django.utils.html import format_html
 
 from ..views.utils import get_cancel_url
 
@@ -47,7 +48,7 @@ class CrispyFormMixin:
 
         self.button_holder = Layout(
             ButtonHolder(
-                HTML(f'<a href="{self.cancel_link}" class="form-link" id="cancel-btn">Cancel</a>'),
+                HTML(format_html('<a href="{}" class="form-link" id="cancel-btn">Cancel</a>', self.cancel_link)),
                 AlpineSubmit(
                     "submit",
                     self.get_submit_button_text(),
@@ -63,7 +64,7 @@ class CrispyFormMixin:
 
         self.readonly_button_holder = Layout(
             ButtonHolder(
-                HTML(f'<a href="{self.cancel_link}" class="form-link" id="cancel-btn">Cancel</a>'),
+                HTML(format_html('<a href="{}" class="form-link" id="cancel-btn">Cancel</a>', self.cancel_link)),
                 css_class=self.button_holder_css + self.button_holder_width,
             )
         )

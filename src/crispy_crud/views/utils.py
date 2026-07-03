@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+from urllib.parse import urlencode
+
 from django.http import HttpRequest
 from django.urls import reverse_lazy
+from django.utils.http import url_has_allowed_host_and_scheme
 
 
 def add_page_context_data(
@@ -29,7 +32,7 @@ def add_page_context_data(
 def get_cancel_url(request: HttpRequest | None, url_name: str | None, kwargs: dict | None = None) -> str | None:
     """
     Return the cancel URL, with query params preserved.
-    Falls back to request referrer if url_name is not provided.
+    Falls back to the request referrer (when same-site) if url_name is not provided.
     """
     if request is None:
         return None
@@ -37,10 +40,18 @@ def get_cancel_url(request: HttpRequest | None, url_name: str | None, kwargs: di
     if url_name:
         action = str(reverse_lazy(url_name, kwargs=kwargs))
     else:
-        action = request.META.get("HTTP_REFERER") or "javascript:history.back()"
+        referer = request.META.get("HTTP_REFERER")
+        if referer and url_has_allowed_host_and_scheme(
+            referer,
+            allowed_hosts={request.get_host()},
+            require_https=request.is_secure(),
+        ):
+            action = referer
+        else:
+            action = "/"
 
-    for k, v in request.GET.items():
-        if k not in ("submit", "ref"):
-            delimiter = "&" if "?" in action else "?"
-            action += f"{delimiter}{k}={v}"
+    params = {k: v for k, v in request.GET.items() if k not in ("submit", "ref")}
+    if params:
+        delimiter = "&" if "?" in action else "?"
+        action += delimiter + urlencode(params)
     return action
