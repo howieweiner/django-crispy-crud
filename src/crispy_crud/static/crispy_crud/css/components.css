@@ -1,5 +1,10 @@
 /*
- * django-crud-kit component classes
+ * DEPRECATED: superseded by `crispy_crud/crispy_crud.css`, a proper
+ * Tailwind CSS v4 entry point. This file is kept for one release as
+ * documentation of the class contract (the component class names and
+ * their styling) and will be removed in a future release.
+ *
+ * django-crispy-crud component classes
  *
  * Import this file in your Tailwind CSS input file:
  *

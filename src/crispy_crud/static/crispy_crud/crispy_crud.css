@@ -1,0 +1,83 @@
+/*
+ * django-crispy-crud — Tailwind CSS v4 entry point.
+ *
+ * Import this file into your Tailwind input CSS, AFTER `@import "tailwindcss";`:
+ *
+ *   @import "tailwindcss";
+ *   @import "<path-to-site-packages>/crispy_crud/static/crispy_crud/crispy_crud.css";
+ *
+ * Run `python manage.py crispy_crud_css` to print the exact line(s) to paste
+ * for your project's install location.
+ *
+ * Requires tailwindcss >= 4.1 (earlier 4.x ignores an explicit @source that
+ * points into a .gitignore'd directory such as a uv-managed .venv —
+ * tailwindlabs/tailwindcss#15452).
+ *
+ * Colour fallbacks below reference Tailwind's `--color-*` theme variables
+ * (e.g. `var(--crud-btn-primary-bg, var(--color-gray-800))`). Tailwind v4
+ * prunes unused theme variables by default, but it statically detects
+ * `var(--color-*)` references inside authored CSS (this file) and keeps
+ * those variables in the compiled output, so the fallbacks resolve
+ * correctly — verified against the compiled build output rather than
+ * assumed.
+ */
+
+@source "../../templates";
+
+@utility btn-primary {
+  @apply flex items-center justify-center gap-2 rounded py-2 px-4 font-semibold hover:cursor-pointer;
+  color: var(--crud-btn-primary-text, var(--color-white));
+  background-color: var(--crud-btn-primary-bg, var(--color-gray-800));
+  &:hover {
+    background-color: var(--crud-btn-primary-bg-hover, var(--color-gray-700));
+  }
+}
+
+@utility btn-secondary {
+  @apply flex items-center justify-center gap-2 rounded border py-2 px-4 font-medium hover:cursor-pointer;
+  color: var(--crud-btn-secondary-text, var(--color-gray-800));
+  background-color: var(--crud-btn-secondary-bg, var(--color-white));
+  border-color: var(--crud-btn-secondary-border, var(--color-gray-300));
+  &:hover {
+    background-color: var(--crud-btn-secondary-bg-hover, var(--color-gray-50));
+  }
+}
+
+@utility btn-important {
+  @apply flex items-center justify-center gap-2 rounded py-2 px-4 font-semibold hover:cursor-pointer;
+  color: var(--crud-btn-important-text, var(--color-white));
+  background-color: var(--crud-btn-important-bg, var(--color-red-700));
+  &:hover {
+    background-color: var(--crud-btn-important-bg-hover, var(--color-red-500));
+  }
+}
+
+@utility btn-disabled {
+  @apply flex items-center justify-center gap-2 rounded py-2 px-4 font-semibold;
+  cursor: not-allowed !important;
+  color: var(--crud-btn-disabled-text, var(--color-gray-500)) !important;
+  background-color: var(--crud-btn-disabled-bg, var(--color-gray-200)) !important;
+}
+
+@utility form-link {
+  @apply py-2 font-medium hover:cursor-pointer;
+  color: var(--crud-form-link-text, var(--color-gray-600));
+  &:hover {
+    color: var(--crud-form-link-text-hover, var(--color-gray-900));
+  }
+}
+
+@utility readonly-form-field {
+  @apply block w-full appearance-none rounded-lg border py-2 px-4 leading-normal;
+  color: var(--crud-readonly-text, var(--color-gray-500));
+  background-color: var(--crud-readonly-bg, var(--color-gray-50));
+  border-color: var(--crud-readonly-border, var(--color-gray-400));
+}
+
+button.toggle {
+  background-color: var(--crud-toggle-bg, var(--color-gray-200));
+}
+
+button.toggle.checked {
+  background-color: var(--crud-toggle-bg-checked, var(--color-green-200)) !important;
+}

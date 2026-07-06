@@ -1,0 +1,27 @@
+/*
+ * Consumer-style Tailwind v4 input CSS for the test app.
+ *
+ * This mirrors how a real consumer project wires up django-crispy-crud: a
+ * plain `@import "tailwindcss";` entry point plus a `:root` block overriding
+ * a handful of `--crud-*` theming variables to prove rebranding works.
+ *
+ * The django-crispy-crud/crispy-tailwind `@import`/`@source` lines are
+ * appended below by running:
+ *
+ *   python manage.py crispy_crud_css --relative-to tests/testapp/static_src/styles.css
+ *
+ * CI does this on every run (see the `css` job in .github/workflows/ci.yml)
+ * and builds the result with the Tailwind CLI. The appended lines are NOT
+ * committed here because the crispy_tailwind resource path embeds the
+ * Python interpreter version (e.g. `python3.11/site-packages/...`), which
+ * would make this file environment-specific.
+ */
+
+@import "tailwindcss";
+
+:root {
+  /* Rebrand the primary button away from the package default (gray) to
+     indigo, proving consumers can override --crud-* theming vars. */
+  --crud-btn-primary-bg: var(--color-indigo-600);
+  --crud-btn-primary-bg-hover: var(--color-indigo-500);
+}

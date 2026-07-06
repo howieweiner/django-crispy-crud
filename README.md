@@ -86,17 +86,76 @@ Your base template must load Alpine.js and HTMX (not bundled):
 <script src="https://unpkg.com/htmx.org@2.0.0"></script>
 ```
 
-### Component CSS
+## Styling
 
-The package templates use custom CSS classes (`btn-primary`, `btn-secondary`, `btn-important`, `btn-disabled`, `form-link`, `readonly-form-field`, `toggle`). A reference stylesheet is provided at `static/crispy_crud/css/components.css` using Tailwind `@apply` directives.
+The package templates use custom CSS classes (`btn-primary`, `btn-secondary`, `btn-important`, `btn-disabled`, `form-link`, `readonly-form-field`, `toggle`), shipped as a Tailwind CSS v4 entry point at `static/crispy_crud/crispy_crud.css`.
 
-Add it to your Tailwind CSS input file:
+### Setup
 
-```css
-@import "../../static/crispy_crud/css/components.css";
+Run the `crispy_crud_css` management command, pointing `--relative-to` at your Tailwind input CSS file, and paste its output into that file after `@import "tailwindcss";`:
+
+```bash
+$ python manage.py crispy_crud_css --relative-to theme/static_src/src/styles.css
+/* django-crispy-crud — paste after @import "tailwindcss"; */
+@import "../../../.venv/lib/python3.13/site-packages/crispy_crud/static/crispy_crud/crispy_crud.css";
+@source "../../../.venv/lib/python3.13/site-packages/crispy_tailwind/templates";
 ```
 
-Or copy the definitions into your own CSS. See the test app's `base.html` for a working example.
+```css
+@import "tailwindcss";
+@import "../../../.venv/lib/python3.13/site-packages/crispy_crud/static/crispy_crud/crispy_crud.css";
+@source "../../../.venv/lib/python3.13/site-packages/crispy_tailwind/templates";
+```
+
+The `@source` line is needed because `{% crispy %}` forms render crispy-tailwind's template pack, whose utility classes your build must scan to generate CSS for. Paths are printed relative to `--relative-to`'s parent directory (matching how `@import`/`@source` resolve); omit the flag to get absolute paths instead.
+
+### Requirements
+
+Requires `tailwindcss >= 4.1` — earlier 4.x releases ignore an explicit `@source` that points into a `.gitignore`'d directory such as a uv-managed `.venv` ([tailwindlabs/tailwindcss#15452](https://github.com/tailwindlabs/tailwindcss/issues/15452)).
+
+### Theming
+
+Every colour in the component classes routes through a `--crud-*` CSS custom property with a package default as its fallback:
+
+| Variable | Default | Affects |
+|---|---|---|
+| `--crud-btn-primary-text` | `white` | `btn-primary` text colour |
+| `--crud-btn-primary-bg` | `gray-800` | `btn-primary` background |
+| `--crud-btn-primary-bg-hover` | `gray-700` | `btn-primary` background on hover |
+| `--crud-btn-secondary-text` | `gray-800` | `btn-secondary` text colour |
+| `--crud-btn-secondary-bg` | `white` | `btn-secondary` background |
+| `--crud-btn-secondary-border` | `gray-300` | `btn-secondary` border colour |
+| `--crud-btn-secondary-bg-hover` | `gray-50` | `btn-secondary` background on hover |
+| `--crud-btn-important-text` | `white` | `btn-important` text colour |
+| `--crud-btn-important-bg` | `red-700` | `btn-important` background |
+| `--crud-btn-important-bg-hover` | `red-500` | `btn-important` background on hover |
+| `--crud-btn-disabled-text` | `gray-500` | `btn-disabled` text colour |
+| `--crud-btn-disabled-bg` | `gray-200` | `btn-disabled` background |
+| `--crud-form-link-text` | `gray-600` | `form-link` text colour |
+| `--crud-form-link-text-hover` | `gray-900` | `form-link` text colour on hover |
+| `--crud-readonly-text` | `gray-500` | `readonly-form-field` text colour |
+| `--crud-readonly-bg` | `gray-50` | `readonly-form-field` background |
+| `--crud-readonly-border` | `gray-400` | `readonly-form-field` border colour |
+| `--crud-toggle-bg` | `gray-200` | `toggle` button background (unchecked) |
+| `--crud-toggle-bg-checked` | `green-200` | `toggle` button background (checked) |
+
+Override a variable in your own CSS to rebrand a component — no fork or package rebuild needed:
+
+```css
+:root {
+  --crud-btn-primary-bg: var(--color-indigo-600);
+  --crud-btn-primary-bg-hover: var(--color-indigo-500);
+}
+```
+
+See the test app's `static_src/styles.css` for a working example.
+
+### Caveats
+
+- Re-run the command after a Python minor version upgrade (the `python3.X` segment of the path changes) or if the virtualenv moves.
+- The pasted paths must also resolve wherever your production CSS is built (e.g. in Docker) -- this holds as long as that build installs the virtualenv at the project root with the same Python version.
+- Projects with no Tailwind build step aren't supported as a first-class case yet.
+- `static/crispy_crud/css/components.css` is deprecated and will be removed in a future release; use `crispy_crud_css` instead.
 
 ## Usage
 
