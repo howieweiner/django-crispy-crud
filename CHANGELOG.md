@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.1.0 (2026-07-06)
+
+### Feat
+
+- consume package CSS in testapp with CI smoke check
+- add crispy_crud_css management command for Tailwind setup
+- add Tailwind v4 entry-point stylesheet with themable component classes
+
 ## v1.0.0 (2026-07-03)
 
 First public release on PyPI, published as `django-crispy-crud` (import as `crispy_crud`).
