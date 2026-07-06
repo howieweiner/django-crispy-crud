@@ -168,3 +168,9 @@ CLAUDE.md
 
 # macOS
 .DS_Store
+
+# Ad hoc Tailwind CLI install for the `css` CI job (see .github/workflows/ci.yml) —
+# not a real Node project, nothing here is committed.
+/node_modules
+/package.json
+/package-lock.json
