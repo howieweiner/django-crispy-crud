@@ -6,9 +6,9 @@
  *
  * django-crispy-crud component classes
  *
- * Import this file in your Tailwind CSS input file:
- *
- *   @import "../../static/crispy_crud/css/components.css";
+ * Reference this file from your Tailwind CSS input file the same way you
+ * would import `crispy_crud/crispy_crud.css` (see that file's header, or
+ * the README's Styling section).
  *
  * Or copy these definitions into your own CSS.
  */

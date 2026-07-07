@@ -1,13 +1,11 @@
 /*
  * django-crispy-crud — Tailwind CSS v4 entry point.
  *
- * Import this file into your Tailwind input CSS, AFTER `@import "tailwindcss";`:
- *
- *   @import "tailwindcss";
- *   @import "<path-to-site-packages>/crispy_crud/static/crispy_crud/crispy_crud.css";
+ * This file must be referenced from your Tailwind input CSS, after the
+ * `tailwindcss` import itself.
  *
  * Run `python manage.py crispy_crud_css` to print the exact line(s) to paste
- * for your project's install location.
+ * for your project's install location, or see the README's Styling section.
  *
  * Requires tailwindcss >= 4.1 (earlier 4.x ignores an explicit @source that
  * points into a .gitignore'd directory such as a uv-managed .venv —
