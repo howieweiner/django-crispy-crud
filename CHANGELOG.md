@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.1.1 (2026-07-07)
+
+### Fix
+
+- remove literal @import examples from shipped CSS headers
+
 ## v1.1.0 (2026-07-06)
 
 ### Feat
